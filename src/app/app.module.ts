@@ -14,9 +14,11 @@ import {
   TypeaheadModule
 } from 'ngx-bootstrap';
 import { TagInputModule } from 'ngx-chips';
+
 // import { EffectsModule } from '@ngrx/effects';
 import { TourNgxBootstrapModule } from 'ngx-tour-ngx-bootstrap';
 import { NotificationModule } from 'patternfly-ng';
+import { ApiModule } from './api';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -39,6 +41,7 @@ import { AppComponent } from './app.component';
     TypeaheadModule.forRoot(),
     TagInputModule,
     // EffectsModule.forRoot([]), // gives runtime error "Uncaught Error: StaticInjectorError[t -> e]:..."
+    ApiModule.forRoot(),
     TourNgxBootstrapModule.forRoot(),
     NotificationModule
   ],
