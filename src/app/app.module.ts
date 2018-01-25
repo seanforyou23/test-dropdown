@@ -38,7 +38,7 @@ import { AppComponent } from './app.component';
     TooltipModule.forRoot(),
     TypeaheadModule.forRoot(),
     TagInputModule,
-    EffectsModule.forRoot([]),
+    // EffectsModule.forRoot([]), // gives runtime error "Uncaught Error: StaticInjectorError[t -> e]:..."
     TourNgxBootstrapModule.forRoot(),
     NotificationModule
   ],
