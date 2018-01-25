@@ -14,7 +14,7 @@ import {
   TypeaheadModule
 } from 'ngx-bootstrap';
 import { TagInputModule } from 'ngx-chips';
-import { EffectsModule } from '@ngrx/effects';
+// import { EffectsModule } from '@ngrx/effects';
 import { TourNgxBootstrapModule } from 'ngx-tour-ngx-bootstrap';
 import { NotificationModule } from 'patternfly-ng';
 import { AppComponent } from './app.component';
