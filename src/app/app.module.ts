@@ -20,6 +20,7 @@ import { TourNgxBootstrapModule } from 'ngx-tour-ngx-bootstrap';
 import { Restangular, RestangularModule } from 'ngx-restangular';
 import { NotificationModule } from 'patternfly-ng';
 
+import { CoreModule } from './core';
 import { appConfigInitializer, ConfigService } from './config.service';
 import { StoreModule as LegacyStoreModule } from './store/store.module';
 import { ApiModule } from './api';
@@ -89,6 +90,7 @@ export function mapperRestangularProvider(
     TourNgxBootstrapModule.forRoot(),
     LegacyStoreModule,
     StoreModule.forRoot(platformReducer),
+    CoreModule.forRoot(),
     NotificationModule
   ],
   providers: [
