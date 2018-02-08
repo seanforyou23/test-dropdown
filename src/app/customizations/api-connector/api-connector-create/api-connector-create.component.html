@@ -1,0 +1,72 @@
+<article class="wizard">
+  <section class="wizard__ui wizard__nav">
+    <nav class="wizard-nav row toolbar-pf toolbar">
+      <div class="col-sm-12">
+        <div class="toolbar-pf-actions">
+          <div class="wizard-nav__breadcrumbs inline-block">
+            <ol class="breadcrumb no-bottom-margin">
+              <li>
+                <a routerLink="/">Home</a>
+              </li>
+              <li>
+                <a routerLink="/customizations/api-connector">Customize</a>
+              </li>
+              <li class="active">
+                <strong>API Client Connector</strong>
+              </li>
+            </ol>
+          </div>
+          <div class="wizard-nav__buttons toolbar-pf-action-right">
+            <button class="wizard-nav__button btn btn-default" (click)="showCancelModal()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </section>
+  <section class="wizard__ui wizard__progress">
+    <syndesis-wizard-progress-bar [steps]="[
+      'Upload Swagger',
+      'Review Swagger Action',
+      'Security',
+      'General Connector Info']" [selectedStep]="currentActiveStep">
+    </syndesis-wizard-progress-bar>
+  </section>
+
+  <section class="wizard__ui wizard__body wizard__body--step1">
+    <div class="row row-cards-pf">
+      <div class="card-pf">
+        <syndesis-api-connector-swagger-upload 
+          [apiConnectorState]="apiConnectorState$ | async"
+          *ngIf="currentActiveStep == 1"
+          (request)="onValidationRequest($event)">
+        </syndesis-api-connector-swagger-upload>
+        <syndesis-api-connector-review *ngIf="currentActiveStep == 2"
+          [apiConnectorTemplateName]="'Swagger'"
+          [apiConnectorData]="(apiConnectorState$ | async)?.createRequest"
+          [showNextButton]="true"
+          (reviewComplete)="onReviewComplete($event)">
+        </syndesis-api-connector-review>
+        <syndesis-api-connector-auth *ngIf="currentActiveStep == 3"
+          [customConnectorRequest]="(apiConnectorState$ | async)?.createRequest"
+          (authSetup)="onAuthSetup($event)">
+        </syndesis-api-connector-auth>
+        <syndesis-api-connector-info *ngIf="currentActiveStep == 4" 
+          [apiConnectorState]="apiConnectorState$ | async"
+          (update)="onCreateComplete($event)">
+        </syndesis-api-connector-info>
+      </div>
+    </div>
+  </section>
+</article>
+
+<ng-template #cancelModalTemplate>
+  <cancel-confirmation-modal (cancel)="onCancel($event)">
+    <h3>Do you really wish to cancel?</h3>
+    <p>
+      You have not completed the API Connector Create process. 
+      If you leave now you will loose all the data you entered already.
+    </p>
+  </cancel-confirmation-modal>
+</ng-template>

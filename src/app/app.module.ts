@@ -18,12 +18,15 @@ import { StoreModule } from '@ngrx/store';
 // import { EffectsModule } from '@ngrx/effects';
 import { TourNgxBootstrapModule } from 'ngx-tour-ngx-bootstrap';
 import { Restangular, RestangularModule } from 'ngx-restangular';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NotificationModule } from 'patternfly-ng';
 
 import { CoreModule } from './core';
 import { appConfigInitializer, ConfigService } from './config.service';
 import { StoreModule as LegacyStoreModule } from './store/store.module';
+import { environment } from '../environments/environment';
 import { ApiModule } from './api';
+import { AppRoutingModule } from './app.routing';
 import { platformReducer, SYNDESIS_GUARDS } from './platform';
 import { AppComponent } from './app.component';
 
@@ -91,6 +94,8 @@ export function mapperRestangularProvider(
     LegacyStoreModule,
     StoreModule.forRoot(platformReducer),
     CoreModule.forRoot(),
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
+    AppRoutingModule,
     NotificationModule
   ],
   providers: [

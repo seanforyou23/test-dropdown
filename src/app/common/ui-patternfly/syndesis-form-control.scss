@@ -1,0 +1,18 @@
+:host /deep/ .tooltip-inner {
+  min-width: 200px;
+  word-wrap: break-word;
+}
+input:read-only,
+textarea:read-only {
+  color: inherit;
+  background-color: transparent;
+  border: none;
+}
+.control-label {
+  cursor: pointer;
+  > .hint-icon {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+  }
+}
